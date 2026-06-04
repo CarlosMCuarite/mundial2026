@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mundial 2026 | Descargas de Equipos</title>
+    <meta name="description" content="Descarga imágenes y recursos de todos los equipos del Mundial 2026 en alta resolución.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="mundial.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Fondo animado con colores de banderas -->
+    <div class="flags-backdrop">
+        <div class="flag-layer layer-1"></div>
+        <div class="flag-layer layer-2"></div>
+        <div class="flag-layer layer-3"></div>
+        <div class="flag-layer layer-4"></div>
+        <div class="flag-layer layer-5"></div>
+        <div class="flag-layer layer-6"></div>
+        <div class="flag-layer layer-7"></div>
+    </div>
+
+    <!-- Luz que sigue al mouse -->
+    <div class="mouse-light"></div>
+
+    <main class="main-content">
+        <header class="hero-section">
+            <h1 class="main-title">MUNDIAL 2026 · CANADÁ · MÉXICO · EE.UU.</h1>
+            <div class="badge-sub">
+                <svg class="trophy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                    <path d="M4 22h16" />
+                    <path d="M12 15v7" />
+                    <path d="M9 9h6" />
+                    <path d="M12 9V4" />
+                    <path d="M9 4h6" />
+                </svg>
+                <span>Descargas oficiales · Equipos y recursos</span>
+            </div>
+        </header>
+
+        <div class="docs-container">
+            <div id="docsGrid" class="list-grid">
+                <!-- Los elementos se cargan dinámicamente -->
+            </div>
+        </div>
+
+        <footer class="footer-global">
+            <p>🏆 FIFA World Cup 2026™ · Todos los derechos reservados · Recursos en alta resolución</p>
+            <p class="footer-note">
+                👁️ Visitas totales: <strong id="visitCounter">0</strong>
+            </p>
+            <p class="footer-note">Los enlaces de descarga dirigen a repositorios oficiales</p>
+        </footer>
+    </main>
+
+    <script>
+        // ========== CONTADOR GLOBAL CON COUNTAPI ==========
+        // Se incrementa automáticamente cada vez que alguien carga la página
+        fetch('https://api.countapi.xyz/hit/mundial2026/visitas')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('visitCounter').innerText = data.value;
+            })
+            .catch(err => {
+                console.error('Error al obtener contador:', err);
+                document.getElementById('visitCounter').innerText = '?';
+            });
+
+        // ========== LISTA DE EQUIPOS Y RECURSOS ==========
+        const itemsDescargas = [
+            { nombre: "TODOS LOS EQUIPOS", detalle: "Pack completo · Calidad Media", url: "https://drive.google.com/drive/folders/1EXkpNiz7-697AqYH4r7YMEZUmPIZNwTR?usp=sharing", formato: "PDF", size: "85.2 MB" },
+            { nombre: "ALEMANIA", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/19OeCtSY0CVI6744WwA6rQelNg4Sb0nUe?usp=sharing", formato: "PDF", size: "5 MB" },
+            { nombre: "ARGENTINA", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/13v7Z3Kfr1oe1_IcLPOaHLKqwTgeteZU8?usp=sharing", formato: "PDF", size: "5.6 MB" },
+            { nombre: "BRASIL", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1HybSFczU4K3NR-eeHGiOXVQSfQ13DB9O?usp=sharing", formato: "PDF", size: "4.8 MB" },
+            { nombre: "COCA COLA", detalle: "Alta resolución · Sponsor oficial", url: "https://drive.google.com/drive/folders/1oiHVnT-dWU7Sf-_XbPOJR9plLgqnc7X7?usp=sharing", formato: "JPG+PNG", size: "4.7 MB" },
+            { nombre: "COLOMBIA", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1ZgnfZfEbqrlHhmDxbt0kJ9CseT3I3yyD?usp=sharing", formato: "PDF", size: "6 MB" },
+            { nombre: "CROACIA", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/15PKflpO9dXteX_ULiR0UbBLe4cIL5CSl?usp=sharing", formato: "PDF", size: "5.8 MB" },
+            { nombre: "ECUADOR", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1R8fsz2LDpWMXuz7DUG9QEBR5DCg6N9Ig?usp=sharing", formato: "PDF", size: "5.8 MB" },
+            { nombre: "ESPAÑA", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1n-dsrP45uNr0YzlZ9swJK2f-k45BVzaP?usp=sharing", formato: "PDF", size: "6 MB" },
+            { nombre: "EXTRAS", detalle: "Contenido adicional · Banners y wallpapers", url: "https://drive.google.com/drive/folders/13gSO2tWda4JVCVoBISeOvo6fdSqVMPjf?usp=sharing", formato: "ZIP", size: "10 MB" },
+            { nombre: "FIGURITAS HOLOGRÁFICAS", detalle: "Edición limitada · Efecto holográfico", url: "https://drive.google.com/drive/folders/1zOC_hYYP8xs5vkrewvxEXvLWSRpGSrDL?usp=sharing", formato: "PNG+WEBP", size: "37 MB" },
+            { nombre: "FRANCIA", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1z4SwVpaMexTs_JCeyvvwydt6wki_5czp?usp=sharing", formato: "PDF", size: "6 MB" },
+            { nombre: "HOLANDA", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1hlPDPnU_5PzsW7zRrf2qOxA0H-A6uE8y?usp=sharing", formato: "PDF", size: "6.1 MB" },
+            { nombre: "INGLATERRA", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1Tvr4XZPfToDyBNiWfRxwy6Gt_Wy-3Isq?usp=sharing", formato: "PDF", size: "6 MB" },
+            { nombre: "MARRUECOS", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1130lWlIhzgRolHCU6IX5SP7IaBjJi_5D?usp=sharing", formato: "PDF", size: "8 MB" },
+            { nombre: "MÉXICO", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1mErQ6mqXcptsmEB52hSAsv5IhOHqwEZD?usp=sharing", formato: "PDF", size: "6 MB" },
+            { nombre: "NEYMAR", detalle: "Pack especial · Alta resolución", url: "https://drive.google.com/drive/folders/1Ot_dOCg15ifLl27SANU_4GVkz0mk9zTY?usp=sharing", formato: "PDF", size: "5 MB" },
+            { nombre: "NORUEGA", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/17_JUh0twZgQsbJtgMqkhJr-TTceXBgzA?usp=sharing", formato: "PDF", size: "6 MB" },
+            { nombre: "PORTUGAL", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1LACf7nmYyfubjbsNUdBfMWP2BzpkD416?usp=sharing", formato: "PDF", size: "6.4 MB" },
+            { nombre: "URUGUAY", detalle: "Alta resolución", url: "https://drive.google.com/drive/folders/1N3b9J-wwaWK_OSPyUa3NIIinTMsR_Z7i?usp=sharing", formato: "PDF", size: "6.4 MB" }
+        ];
+
+        const docsGrid = document.getElementById('docsGrid');
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        function renderItems(items) {
+            if (!items.length) {
+                docsGrid.innerHTML = `
+                    <div class="empty-message">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <p>✨ No hay recursos disponibles en este momento.<br>Por favor, intenta más tarde.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const itemsHtml = items.map((item, idx) => `
+                <div class="card-doc" style="animation-delay: ${idx * 0.01}s">
+                    <div class="doc-info">
+                        <div class="icon-doc">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                            </svg>
+                        </div>
+                        <div class="doc-text">
+                            <h3>${escapeHtml(item.nombre)}</h3>
+                            <p>${escapeHtml(item.detalle)}</p>
+                            <div class="file-meta">
+                                <span>📦 ${item.formato}</span>
+                                <span>💾 ${item.size}</span>
+                                <span>⭐ Oficial</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-down">
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-download-premium">
+                            <span>Descargar ahora</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+            docsGrid.innerHTML = itemsHtml;
+        }
+
+        renderItems(itemsDescargas);
+
+        // Efecto de luz que sigue al mouse
+        const mouseLight = document.querySelector('.mouse-light');
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            mouseLight.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        // Dinamismo en las capas del fondo
+        setInterval(() => {
+            const layers = document.querySelectorAll('.flag-layer');
+            if (layers.length) {
+                const randomLayer = layers[Math.floor(Math.random() * layers.length)];
+                if (randomLayer) {
+                    randomLayer.style.animationDuration = `${12 + Math.random() * 10}s`;
+                    setTimeout(() => {
+                        if(randomLayer) randomLayer.style.animationDuration = '';
+                    }, 600);
+                }
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+:root {
+    --radius-card: 32px;
+    --radius-btn: 50px;
+    --transition-default: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    --glass-bg-light: rgba(255, 255, 250, 0.92);
+    --glass-border-light: rgba(218, 165, 32, 0.4);
+    --gold: #FFC72C;
+    --gold-dark: #EAB308;
+    --text-dark: #0a0f1c;
+    --text-muted-dark: #2c3e4e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #000;
+    color: #0f172a;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Fondo principal: colores vivos que cambian constantemente */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: linear-gradient(135deg, 
+        #FF0000,  /* Rojo */
+        #FFFF00,  /* Amarillo */
+        #00FF00,  /* Verde */
+        #00FFFF,  /* Cian */
+        #FF00FF,  /* Magenta */
+        #FF0000   /* Vuelve a rojo */
+    );
+    background-size: 400% 400%;
+    animation: vividMove 8s ease infinite alternate, hueRotate 8s linear infinite;
+}
+
+/* Movimiento del gradiente */
+@keyframes vividMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Rotación de tono completa (0° a 360°) para que los colores se transformen */
+@keyframes hueRotate {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Luz del mouse (sutil, no interfiere) */
+.mouse-light {
+    position: fixed;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 80%);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    left: 0;
+    top: 0;
+    z-index: 0;
+    transition: transform 0.05s linear;
+    mix-blend-mode: overlay;
+    will-change: transform;
+}
+
+/* El resto del CSS se mantiene sin cambios (cabecera, tarjetas, footer) */
+.main-content {
+    position: relative;
+    z-index: 5;
+}
+
+.hero-section {
+    padding: 70px 24px 50px;
+    text-align: center;
+    position: relative;
+}
+
+.main-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #0a2540, #1e4a76, #3b82f6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.badge-sub {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    padding: 10px 28px;
+    border-radius: 80px;
+    border: 1px solid rgba(255, 215, 0, 0.6);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.badge-sub span {
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    color: #FFE6B0;
+}
+
+.trophy-icon {
+    width: 24px;
+    height: 24px;
+    stroke: #FFD966;
+}
+
+.docs-container {
+    max-width: 1200px;
+    margin: 30px auto 70px;
+    padding: 0 24px;
+}
+
+.list-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.card-doc {
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-card);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid var(--glass-border-light);
+    transition: var(--transition-default);
+    animation: cardGlide 0.4s ease-out backwards;
+    box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.15);
+}
+
+.card-doc:hover {
+    transform: translateY(-6px) scale(1.01);
+    background: rgba(255, 255, 250, 0.98);
+    border-color: var(--gold);
+    box-shadow: 0 28px 40px -12px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes cardGlide {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.doc-info {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.icon-doc {
+    width: 58px;
+    height: 58px;
+    background: rgba(218, 165, 32, 0.15);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(218, 165, 32, 0.4);
+    transition: var(--transition-default);
+}
+
+.card-doc:hover .icon-doc {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    transform: rotate(5deg) scale(1.05);
+    border-color: white;
+}
+
+.icon-doc svg {
+    width: 28px;
+    height: 28px;
+    stroke: #6b4c1c;
+    stroke-width: 1.8;
+    fill: none;
+}
+
+.card-doc:hover .icon-doc svg {
+    stroke: white;
+}
+
+.doc-text h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    letter-spacing: -0.3px;
+}
+
+.doc-text p {
+    color: var(--text-muted-dark);
+    font-size: 0.9rem;
+    line-height: 1.45;
+    margin-bottom: 10px;
+    max-width: 550px;
+}
+
+.file-meta {
+    display: inline-flex;
+    gap: 14px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #7f5f1a;
+    background: rgba(0,0,0,0.05);
+    padding: 5px 12px;
+    border-radius: 50px;
+    letter-spacing: 0.3px;
+}
+
+.btn-download-premium {
+    background: linear-gradient(105deg, var(--gold), var(--gold-dark));
+    padding: 12px 28px;
+    border-radius: var(--radius-btn);
+    font-weight: 800;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #1a2a0f;
+    text-decoration: none;
+    transition: var(--transition-default);
+    box-shadow: 0 10px 18px -5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,200,0.7);
+}
+
+.btn-download-premium:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(105deg, #FFD966, #F59E0B);
+    box-shadow: 0 20px 30px -6px rgba(234, 179, 8, 0.5);
+    gap: 14px;
+    color: #0a0a0a;
+}
+
+.btn-download-premium svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s;
+    stroke: #1a2a0f;
+}
+
+.btn-download-premium:hover svg {
+    transform: translateY(3px);
+}
+
+.empty-message {
+    text-align: center;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(12px);
+    border-radius: 48px;
+    padding: 55px 30px;
+    border: 1px dashed var(--gold);
+}
+
+.empty-message svg {
+    width: 60px;
+    height: 60px;
+    stroke: #FFD966;
+    margin-bottom: 20px;
+}
+
+.empty-message p {
+    color: #F1F5F9;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.footer-global {
+    text-align: center;
+    padding: 40px 24px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(12px);
+    margin-top: 40px;
+    border-top: 1px solid rgba(255,215,0,0.4);
+    color: #F8FAFC;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.footer-note {
+    margin-top: 8px;
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 780px) {
+    .main-title { font-size: 2.2rem; }
+    .badge-sub span { font-size: 0.9rem; }
+    .card-doc { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .doc-info { width: 100%; }
+    .col-down { width: 100%; text-align: left; margin-top: 8px; }
+    .icon-doc { width: 48px; height: 48px; }
+    .hero-section { padding: 50px 16px 30px; }
+}
+
+@media (max-width: 500px) {
+    .main-title { font-size: 1.8rem; }
+    .doc-text h3 { font-size: 1.1rem; }
+    .badge-sub { padding: 6px 18px; }
+}
