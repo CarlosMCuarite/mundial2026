@@ -63,14 +63,15 @@
     <script>
         // ========== CONTADOR GLOBAL CON COUNTAPI ==========
         // Se incrementa automáticamente cada vez que alguien carga la página
-        fetch('https://api.countapi.xyz/hit/mundial2026/visitas')
-            .then(res => res.json())
+        fetch('/api/visitas')
+            .then(response => response.json())
             .then(data => {
-                document.getElementById('visitCounter').innerText = data.value;
+                document.getElementById('visitCounter').innerText =
+                    data.visitas.toLocaleString();
             })
-            .catch(err => {
-                console.error('Error al obtener contador:', err);
-                document.getElementById('visitCounter').innerText = '?';
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('visitCounter').innerText = '0';
             });
 
         // ========== LISTA DE EQUIPOS Y RECURSOS ==========
